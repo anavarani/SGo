@@ -9,6 +9,7 @@ androidxTestExt = "1.1.4"
 hilt = "2.44.2"
 kotlinPlugin = "1.8.0"
 junit4 = "4.13.2"
+okhttp = "4.10.0"
 retrofit = "2.9.0"
 
 [libraries]
@@ -25,6 +26,7 @@ androidx-test-ext = { group = "androidx.test.ext", name = "junit-ktx", version.r
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 

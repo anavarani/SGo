@@ -20,6 +20,8 @@ dependencies {
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.converter.gson)
 
+    implementation(libs.okhttp.logging)
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
