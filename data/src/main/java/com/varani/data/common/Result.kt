@@ -1,4 +1,4 @@
-package com.varani.data
+package com.varani.data.common
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
