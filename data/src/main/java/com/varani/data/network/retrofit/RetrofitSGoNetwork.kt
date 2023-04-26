@@ -16,7 +16,7 @@ private interface RetrofitSGoNetworkApi {
     suspend fun getMovies(): List<MovieDto>
 }
 
-private const val SGoBaseUrl = "https://api.npoint.io/"
+const val SGoBaseUrl = "https://api.npoint.io/"
 
 class RetrofitSGoNetwork(
     gson: Gson,
