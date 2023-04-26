@@ -1,6 +1,6 @@
 package com.varani.data.di
 
-import com.varani.data.network.SGoDataSource
+import com.varani.data.network.retrofit.RetrofitSGoNetworkApi
 import com.varani.data.network.retrofit.SGoBaseUrl
 import dagger.Module
 import dagger.Provides
@@ -35,9 +35,9 @@ interface NetworkModule {
     }
 
     @Provides
-    fun provideSGoApi(
+    fun provideMoviesApi(
         retrofit: Retrofit
-    ): SGoDataSource {
-        return retrofit.create(SGoDataSource::class.java)
+    ): RetrofitSGoNetworkApi {
+        return retrofit.create(RetrofitSGoNetworkApi::class.java)
     }
 }
