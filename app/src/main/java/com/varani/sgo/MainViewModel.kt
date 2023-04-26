@@ -7,10 +7,7 @@ import com.varani.data.Movie
 import com.varani.data.common.Result
 import com.varani.data.common.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 /**
@@ -21,9 +18,21 @@ class MainViewModel @Inject constructor(
     movieRepository: CachedMovieRepository
 ) : ViewModel() {
 
+    private var _searchText = MutableStateFlow("")
+    val searchText = _searchText.asStateFlow()
+
     val uiState: StateFlow<UiState> =
         movieRepository
             .getAllMovies()
+            .combine(searchText) { list, text ->
+                if (text.isBlank()) {
+                    list
+                } else {
+                    list.filter {
+                        it.doesMatchQuery(text)
+                    }
+                }
+            }
             .asResult()
             .map { result ->
                 when (result) {
@@ -37,6 +46,10 @@ class MainViewModel @Inject constructor(
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = UiState.Loading,
             )
+
+    fun onTextChange(text: String) {
+        _searchText.value = text
+    }
 }
 
 sealed class UiState {

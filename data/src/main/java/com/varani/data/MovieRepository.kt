@@ -33,4 +33,14 @@ fun MovieDto.toExternalModel() = Movie(
 data class Movie(
     var genre: String? = null,
     var title: String? = null,
-)
+) {
+    fun doesMatchQuery(query: String): Boolean {
+        val matchingCombinations = listOf(
+            "$genre",
+            "$title",
+        )
+        return matchingCombinations.any {
+            it.contains(query, ignoreCase = true)
+        }
+    }
+}

@@ -7,9 +7,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,15 +49,30 @@ fun SGoApp() {
     }
 }
 
+@Composable
+fun SearchBar(
+    viewModel: MainViewModel = hiltViewModel()
+) {
+    val searchText = viewModel.searchText.collectAsStateWithLifecycle()
+
+    SearchRow(searchText.value, viewModel::onTextChange)
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar() {
-    TopAppBar(
-        title = {
-            Text(text = "Top App Bar")
-        },
-        colors = TopAppBarDefaults.topAppBarColors()
-    )
+private fun SearchRow(
+    searchText: String,
+    onTextChange: (String) -> Unit
+) {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        TextField(
+            value = searchText,
+            onValueChange = onTextChange,
+            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = { Icon(Icons.Default.Search, null) },
+            placeholder = { Text(text = "Search") }
+        )
+    }
 }
 
 @Composable
